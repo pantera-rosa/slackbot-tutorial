@@ -4,7 +4,7 @@ import logging
 
 from flask import Flask, request, make_response, Response
 
-from slack.web.client import WebClient
+from slack import WebClient
 from slack.errors import SlackApiError
 from slack.signature import SignatureVerifier
 
@@ -34,7 +34,7 @@ def command():
 
   try:
     response = slack_client.chat_postMessage(
-      channel='#{}'.format(info["channel_name"]), 
+      channel='#{}'.format(info["findmynerd_test"]), 
       text=commander.getMessage()
     )#.get()
   except SlackApiError as e:
@@ -51,6 +51,6 @@ if __name__ == "__main__":
   slack_client = WebClient(SLACK_BOT_TOKEN)
   verifier = SignatureVerifier(SLACK_SIGNATURE)
 
-  commander = Slash("Hey there! It works.")
+  commander = Slash("Hey! Slash command works.")
 
   app.run()
